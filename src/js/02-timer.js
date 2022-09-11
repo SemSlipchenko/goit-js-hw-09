@@ -8,6 +8,7 @@ const refs = {
   hours: document.querySelector('[data-hours'),
   minutes: document.querySelector('[data-minutes'),
   seconds: document.querySelector('[data-seconds'),
+  endTime: null,
 };
 
 refs.startBtn.setAttribute('disabled','');
@@ -15,8 +16,6 @@ refs.startBtn.setAttribute('disabled','');
 refs.startBtn.addEventListener('click', () => {
   timer.start();
 });
-
-let endTime = null;
 
 const options = {
   enableTime: true,
@@ -29,7 +28,7 @@ const options = {
       window.alert('Please choose a date in the future');
     } else {
       refs.startBtn.removeAttribute('disabled');
-      endTime = selectedDates[0];
+      refs.endTime = selectedDates[0];
     }
   },
 };
@@ -55,7 +54,7 @@ class Timer {
 
     this.intervalId = setInterval(() => {
       const startTime = Date.now();
-      const deltaTime = endTime - startTime;
+      const deltaTime = refs.endTime - startTime;
       const time = this.convertMs(deltaTime);
       this.onTick(time);
       if (deltaTime <= 1000) {
