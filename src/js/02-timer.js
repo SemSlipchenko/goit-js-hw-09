@@ -55,8 +55,7 @@ class Timer {
     this.intervalId = setInterval(() => {
       const startTime = Date.now();
       const deltaTime = refs.endTime - startTime;
-      const time = this.convertMs(deltaTime);
-      this.onTick(time);
+      this.onTick(this.convertMs(deltaTime));
       if (deltaTime <= 1000) {
         clearInterval(this.intervalId);
       }
